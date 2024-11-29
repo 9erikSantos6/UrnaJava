@@ -17,4 +17,30 @@ public class Partido {
     void zerarVotos() {
         this.TotalVotos = 0;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    // Gets e Sets:
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNumeroRegistro() {
+        return numeroRegistro;
+    }
+
+    public void setNumeroRegistro(String numeroRegistro) {
+        this.numeroRegistro = numeroRegistro;
+    }
+
+    public int getTotalVotos() {
+        return TotalVotos;
+    }
+
+    public void setTotalVotos(int totalVotos) {
+        TotalVotos = totalVotos;
+    }
 }
