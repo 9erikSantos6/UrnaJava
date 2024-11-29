@@ -18,7 +18,7 @@ public abstract class ViceCandidato extends Candidato {
             prefeito.associarViceCandidato(this); 
         }
 
-        // Fanlatando fazer o mesmo para Governador e Presidente
+        // Faltando fazer o mesmo para Governador e Presidente
     }
 
     public void desassociarViceCandidato() {
