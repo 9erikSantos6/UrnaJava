@@ -2,12 +2,15 @@ package br.ifpi.urna.candidato;
 
 import br.ifpi.urna.partido.Partido;
 import br.ifpi.urna.shared.interfaces.candidato.ViceAssociado;
+import br.ifpi.urna.shared.models.candidato.CandidatoTitular;
+import br.ifpi.urna.shared.models.candidato.ViceCandidato;
 
 public class Presidente extends CandidatoTitular implements ViceAssociado {
-  private ViceCandidato vicePresidenteAssociado;
+  private VicePresidente vicePresidenteAssociado;
 
-  Presidente(String nome, String numero, Partido partido) {
+  public Presidente(String nome, String numero, Partido partido) {
     super(nome, numero, partido);
+    this.numero = validarNumero(numero);
   }
 
   protected String validarNumero(String numero) {
@@ -19,16 +22,24 @@ public class Presidente extends CandidatoTitular implements ViceAssociado {
   }
 
   public void associarViceCandidato(ViceCandidato vicePresidente) {
-    this.vicePresidenteAssociado = vicePresidente;
-    vicePresidente.associarCandidatoTitular(this);
+    if (vicePresidente instanceof VicePresidente) {
+      VicePresidente viceAssociado = (VicePresidente) vicePresidente;
+      if (this.vicePresidenteAssociado != viceAssociado) {
+        this.vicePresidenteAssociado = viceAssociado;
+        vicePresidente.associarCandidatoTitular(this);
+      }
+    } else {
+      throw new IllegalArgumentException("Candidato inválido para associarViceCandidato: deve ser do tipo VicePresidente");
+    }
   }
 
   public void desassociarViceCandidato() {
+    this.vicePresidenteAssociado.desassociarViceCandidato();
     this.vicePresidenteAssociado = null;
   }
 
   // Gets
-  public ViceCandidato getvicePresidenteAssociado() {
+  public VicePresidente getvicePresidenteAssociado() {
     return this.vicePresidenteAssociado;
   }
 }
