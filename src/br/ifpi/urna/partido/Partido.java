@@ -5,16 +5,16 @@ public class Partido {
     private String numeroRegistro;
     private int TotalVotos;
 
-    Partido(String nome, String numeroRegistro) {
+    public Partido(String nome, String numeroRegistro) {
         this.nome = nome;
         this.numeroRegistro = numeroRegistro;
     }
 
-    void adicionarVotos() {
+    public void adicionarVotos() {
         this.TotalVotos++;
     }
 
-    void zerarVotos() {
+    public void zerarVotos() {
         this.TotalVotos = 0;
     }
 
