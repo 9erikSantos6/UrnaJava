@@ -1,5 +1,6 @@
-package br.ifpi.urna.candidato;
+package br.ifpi.urna.candidato.vice;
 
+import br.ifpi.urna.candidato.titular.Presidente;
 import br.ifpi.urna.partido.Partido;
 import br.ifpi.urna.shared.models.candidato.CandidatoTitular;
 import br.ifpi.urna.shared.models.candidato.ViceCandidato;
