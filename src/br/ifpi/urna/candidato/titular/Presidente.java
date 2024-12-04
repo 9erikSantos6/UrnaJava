@@ -40,7 +40,7 @@ public class Presidente extends CandidatoTitular implements IViceAssociado {
   }
 
   // Gets
-  public VicePresidente getvicePresidenteAssociado() {
+  public VicePresidente getViceCandidatoAssociado() {
     return this.vicePresidenteAssociado;
   }
 }
