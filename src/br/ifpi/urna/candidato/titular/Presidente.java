@@ -24,10 +24,10 @@ public class Presidente extends CandidatoTitular implements IViceAssociado {
 
   public void associarViceCandidato(ViceCandidato vicePresidente) {
     if (vicePresidente instanceof VicePresidente) {
-      VicePresidente viceAssociado = (VicePresidente) vicePresidente;
-      if (this.vicePresidenteAssociado != viceAssociado) {
-        this.vicePresidenteAssociado = viceAssociado;
-        vicePresidente.associarCandidatoTitular(this);
+      VicePresidente candidatoVice = (VicePresidente) vicePresidente;
+      if (this.vicePresidenteAssociado != candidatoVice) {
+        this.vicePresidenteAssociado = candidatoVice;
+        this.vicePresidenteAssociado.associarCandidatoTitular(this);
       }
     } else {
       throw new IllegalArgumentException("Candidato inválido para associarViceCandidato: deve ser do tipo VicePresidente");
@@ -35,7 +35,9 @@ public class Presidente extends CandidatoTitular implements IViceAssociado {
   }
 
   public void desassociarViceCandidato() {
-    this.vicePresidenteAssociado.desassociarViceCandidato();
+    if (this.vicePresidenteAssociado.getCandidatoTitularAssociado() != this) {
+      this.vicePresidenteAssociado.desassociarViceCandidato();
+    }
     this.vicePresidenteAssociado = null;
   }
 

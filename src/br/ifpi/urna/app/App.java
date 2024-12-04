@@ -14,6 +14,9 @@ public class App {
 
       vicePresidente.associarCandidatoTitular(presidente);
 
+      System.out.println();
+      System.out.println(vicePresidente.getCandidatoTitularAssociado());
+      vicePresidente.desassociarViceCandidato();
       System.out.println(vicePresidente.getCandidatoTitularAssociado());
     }
 }
