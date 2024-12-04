@@ -2,11 +2,11 @@ package br.ifpi.urna.candidato.titular;
 
 import br.ifpi.urna.candidato.vice.VicePresidente;
 import br.ifpi.urna.partido.Partido;
-import br.ifpi.urna.shared.interfaces.candidato.ViceAssociado;
+import br.ifpi.urna.shared.interfaces.candidato.IViceAssociado;
 import br.ifpi.urna.shared.models.candidato.CandidatoTitular;
 import br.ifpi.urna.shared.models.candidato.ViceCandidato;
 
-public class Presidente extends CandidatoTitular implements ViceAssociado {
+public class Presidente extends CandidatoTitular implements IViceAssociado {
   private VicePresidente vicePresidenteAssociado;
 
   public Presidente(String nome, String numero, Partido partido) {
