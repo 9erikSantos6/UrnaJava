@@ -1,4 +1,4 @@
-package br.ifpi.urna;
+package br.ifpi.urna.app;
 
 import br.ifpi.urna.candidato.titular.Presidente;
 import br.ifpi.urna.candidato.vice.VicePresidente;
