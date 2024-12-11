@@ -2,6 +2,8 @@ package br.ifpi.urna.candidato.titular;
 
 import br.ifpi.urna.partido.Partido;
 import br.ifpi.urna.shared.models.candidato.CandidatoTitular;
+import br.ifpi.urna.shared.utils.candidato.Candidato;
+import br.ifpi.urna.shared.utils.candidato.TipoCandidatoValidacao;
 
 public class DeputadoFederal extends CandidatoTitular {
   public DeputadoFederal(String nome, String numero, Partido partido) {
@@ -10,10 +12,6 @@ public class DeputadoFederal extends CandidatoTitular {
 
   @Override
   protected String validarNumero(String numero) {
-    if (numero != null && numero.matches("\\d{4}")) {
-      return numero;
-    } else {
-      throw new IllegalArgumentException("Número inválido para Senador: deve ter exatamente cinco dígitos.");
-    }
+    return Candidato.validarNumero(TipoCandidatoValidacao.DEPUTADO_FEDERAL, numero);
   }
 }

@@ -5,6 +5,8 @@ import br.ifpi.urna.partido.Partido;
 import br.ifpi.urna.shared.interfaces.candidato.IViceAssociado;
 import br.ifpi.urna.shared.models.candidato.CandidatoTitular;
 import br.ifpi.urna.shared.models.candidato.ViceCandidato;
+import br.ifpi.urna.shared.utils.candidato.Candidato;
+import br.ifpi.urna.shared.utils.candidato.TipoCandidatoValidacao;
 
 public class Prefeito extends CandidatoTitular implements IViceAssociado {
   private VicePrefeito vicePrefeitoAssociado;
@@ -14,12 +16,9 @@ public class Prefeito extends CandidatoTitular implements IViceAssociado {
     this.numero = this.validarNumero(numero);
   }
 
+  @Override
   protected String validarNumero(String numero) {
-    if (numero != null && numero.matches("\\d{2}")) {
-      return numero;
-    } else {
-      throw new IllegalArgumentException("Número inválido para Prefeito: deve ter exatamente dois dígitos.");
-    }
+    return Candidato.validarNumero(TipoCandidatoValidacao.PREFEITO, numero);
   }
 
   public void associarViceCandidato(ViceCandidato vicePrefeito) {
