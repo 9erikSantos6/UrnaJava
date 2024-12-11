@@ -8,18 +8,8 @@ import br.ifpi.urna.shared.models.candidato.ViceCandidato;
 public class ViceGovernador extends ViceCandidato {
   private Governador governadorTitularAssociado;
 
-  public ViceGovernador(String nome, String numero, Partido partido) {
-    super(nome, numero, partido);
-    this.numero = validarNumero(numero);
-  }
-
-  @Override
-  protected String validarNumero(String numero) {
-    if (numero != null && numero.matches("\\d{2}")) {
-      return numero;
-    } else {
-      throw new IllegalArgumentException("Número inválido para ViceGovernador: deve ter exatamente dois dígitos.");
-    }
+  public ViceGovernador(String nome, Partido partido) {
+    super(nome, partido);
   }
 
   @Override

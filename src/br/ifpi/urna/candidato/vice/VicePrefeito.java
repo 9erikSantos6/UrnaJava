@@ -8,12 +8,11 @@ import br.ifpi.urna.shared.models.candidato.ViceCandidato;
 public class VicePrefeito extends ViceCandidato {
   private Prefeito prefeitoTitularAssociado;
 
-  public VicePrefeito(String nome, String numero, Partido partido) {
-    super(nome, numero, partido);
+  public VicePrefeito(String nome, Partido partido) {
+    super(nome, partido);
     this.numero = validarNumero(numero);
   }
 
-  @Override
   protected String validarNumero(String numero) {
     if (numero != null && numero.matches("\\d{2}")) {
       return numero;
