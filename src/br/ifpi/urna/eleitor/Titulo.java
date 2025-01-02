@@ -4,15 +4,33 @@ package br.ifpi.urna.eleitor;
 
 import java.time.LocalDate;
 
-public class Titulo {
+class Titulo {
   private String inscricao;
   private LocalDate dataEmissao;
   private String zona;
   private String secao;
   private Eleitor eleitor;
 
-  public Titulo(Eleitor eleitor) {
-    this.eleitor = eleitor;
+  protected Titulo(String zona, String secao) {
+    this.zona = validarZona(zona);
+    this.secao = validarSecao(secao);
+    this.dataEmissao = LocalDate.now();
+  }
+
+  public static String validarZona(String zona) {
+    if (zona != null && zona.matches("\\d{3}")) {
+      return zona;
+    } else {
+      throw new IllegalArgumentException(String.format("Número inválido para zona: deve ter exatamente 3 dígitos."));
+    }
+  }
+
+  public static String validarSecao(String secao) {
+    if (secao != null && secao.matches("\\d{4}")) {
+      return secao;
+    } else {
+      throw new IllegalArgumentException(String.format("Número inválido para secao: deve ter exatamente 4 dígitos."));
+    }
   }
 
   // GETs e SETs:

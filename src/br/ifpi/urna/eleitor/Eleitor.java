@@ -3,6 +3,8 @@ package br.ifpi.urna.eleitor;
 
 import java.time.LocalDate;
 
+// import br.ifpi.urna.shared.utils.eleitor.Titulo;
+
 public class Eleitor {
   private String nome;
   private LocalDate dataNascimento;
@@ -17,9 +19,9 @@ public class Eleitor {
     this.nomeMae = nomeMae;
   }
 
-  public void criarTitulo() {
+  public void criarTitulo(String zona, String secao) {
     if (this.titulo == null) {
-        this.titulo = new Titulo(this);
+        this.titulo = new Titulo(zona, secao);
     }
   }
 
