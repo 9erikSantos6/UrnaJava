@@ -5,7 +5,11 @@ public class Candidato {
       if (numero != null && numero.matches(String.format("\\d{%d}", tipoCandidato.getQuantidadeDigitos()))) {
           return numero;
       } else {
-          throw new IllegalArgumentException(String.format("Número inválido para %s: deve ter exatamente %d dígitos.", tipoCandidato.getNome(), tipoCandidato.getQuantidadeDigitos()));
+          throw new IllegalArgumentException(String.format(
+            "Número inválido para %s: deve ter exatamente %d dígitos.", 
+            tipoCandidato.getNome(), 
+            tipoCandidato.getQuantidadeDigitos()
+          ));
       }
   }
 }
