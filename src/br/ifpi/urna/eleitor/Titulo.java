@@ -3,34 +3,64 @@
 package br.ifpi.urna.eleitor;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
-class Titulo {
+import br.ifpi.urna.shared.utils.titulo.TipoLocalizacaoValidacao;
+
+public class Titulo {
   private String inscricao;
-  private LocalDate dataEmissao;
   private String zona;
   private String secao;
+  private LocalDate dataEmissao;
   private Eleitor eleitor;
 
-  protected Titulo(String zona, String secao) {
-    this.zona = validarZona(zona);
-    this.secao = validarSecao(secao);
+  Titulo(String zona, String secao, Eleitor eleitor) {
+    this.inscricao = this.gerarNumeroInscricao();
+    this.zona = this.validarLocalizacao(TipoLocalizacaoValidacao.ZONA, zona);
+    this.secao = this.validarLocalizacao(TipoLocalizacaoValidacao.SECAO, secao);
     this.dataEmissao = LocalDate.now();
+    this.eleitor = eleitor;
   }
 
-  public static String validarZona(String zona) {
-    if (zona != null && zona.matches("\\d{3}")) {
-      return zona;
-    } else {
-      throw new IllegalArgumentException(String.format("Número inválido para zona: deve ter exatamente 3 dígitos."));
-    }
+  private String validarLocalizacao(TipoLocalizacaoValidacao tipoLocalizacao, String numero) {
+    return br.ifpi.urna.shared.utils.titulo.Titulo.validarLocalizacao(tipoLocalizacao, numero);
   }
 
-  public static String validarSecao(String secao) {
-    if (secao != null && secao.matches("\\d{4}")) {
-      return secao;
-    } else {
-      throw new IllegalArgumentException(String.format("Número inválido para secao: deve ter exatamente 4 dígitos."));
-    }
+  private String gerarNumeroInscricao() {
+    return br.ifpi.urna.shared.utils.titulo.Titulo.gerarNumeroInscricao();
+  }
+
+  public void renovarZonaSecao(String zona, String secao) {
+    this.zona = this.validarLocalizacao(TipoLocalizacaoValidacao.ZONA, zona);
+    this.secao = this.validarLocalizacao(TipoLocalizacaoValidacao.SECAO, secao);
+  }
+
+  public String toString() {
+    return String.format("""
+      \nInscrição: %s
+      Zona: %s
+      Seção: %s
+      Data de emissão: %s
+      """, 
+      this.inscricao,
+      this.zona,
+      this.secao,
+      this.dataEmissao.toString()
+    );
+  }
+
+  // Utilizado em HashSets
+  @Override 
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (!(obj instanceof Titulo)) return false;
+    Titulo outroTitulo = (Titulo) obj;
+    return this.inscricao.equals(outroTitulo.getInscricao());
+  }
+
+  @Override 
+  public int hashCode() {
+    return Objects.hash(this.inscricao, this.eleitor.getNome());
   }
 
   // GETs e SETs:

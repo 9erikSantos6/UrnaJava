@@ -3,8 +3,6 @@ package br.ifpi.urna.eleitor;
 
 import java.time.LocalDate;
 
-// import br.ifpi.urna.shared.utils.eleitor.Titulo;
-
 public class Eleitor {
   private String nome;
   private LocalDate dataNascimento;
@@ -12,17 +10,40 @@ public class Eleitor {
   private String nomeMae;
   private Titulo titulo = null;
 
-  public Eleitor(String nome, LocalDate dataNascimento, String nomePai, String nomeMae) {
-    this.nome = nome;
-    this.dataNascimento = dataNascimento;
-    this.nomePai = nomePai;
-    this.nomeMae = nomeMae;
+  public Eleitor(String nome, String dataNascimento, String nomePai, String nomeMae) {
+    try {
+      this.nome = nome;
+      this.dataNascimento = LocalDate.parse(dataNascimento);
+      this.nomePai = nomePai;
+      this.nomeMae = nomeMae;
+    } catch (Exception error) {
+      System.out.println(error.getMessage());
+    }
   }
 
   public void criarTitulo(String zona, String secao) {
     if (this.titulo == null) {
-        this.titulo = new Titulo(zona, secao);
+      this.titulo = new Titulo(zona, secao, this);
     }
+  }
+
+  public void renovarTitulo(String zona,  String secao) {
+    if (this.titulo != null) {
+      this.titulo.renovarZonaSecao(zona, secao);
+    }
+  }
+
+  public String toString() {
+    return String.format("""
+      \nNome: %s
+      Data de Nascimento: %s 
+      Nome do Pai: %s 
+      Nome da mãe: %s
+      """, 
+      this.nome, 
+      this.dataNascimento, 
+      this.nomePai, 
+      this.nomeMae);
   }
 
   // GETs e SETs:
@@ -60,9 +81,5 @@ public class Eleitor {
 
   public Titulo getTitulo() {
     return titulo;
-  }
-
-  public void setTitulo(Titulo titulo) {
-    this.titulo = titulo;
   }
 }
