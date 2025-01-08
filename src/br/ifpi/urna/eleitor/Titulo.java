@@ -8,11 +8,11 @@ import java.util.Objects;
 import br.ifpi.urna.shared.utils.titulo.TipoLocalizacaoValidacao;
 
 public class Titulo {
-  private String inscricao;
+  private final String inscricao;
   private String zona;
   private String secao;
-  private LocalDate dataEmissao;
-  private Eleitor eleitor;
+  private final LocalDate dataEmissao;
+  private final Eleitor eleitor;
 
   Titulo(String zona, String secao, Eleitor eleitor) {
     this.inscricao = this.gerarNumeroInscricao();
@@ -35,17 +35,20 @@ public class Titulo {
     this.secao = this.validarLocalizacao(TipoLocalizacaoValidacao.SECAO, secao);
   }
 
+  @Override
   public String toString() {
     return String.format("""
-      \nInscrição: %s
+      Inscrição: %s
       Zona: %s
       Seção: %s
       Data de emissão: %s
+      Eleitor: %s
       """, 
       this.inscricao,
       this.zona,
       this.secao,
-      this.dataEmissao.toString()
+      this.dataEmissao.toString(),
+      this.eleitor != null ? this.eleitor.getNome() : "N/A"
     );
   }
 
@@ -60,7 +63,7 @@ public class Titulo {
 
   @Override 
   public int hashCode() {
-    return Objects.hash(this.inscricao, this.eleitor.getNome());
+    return Objects.hash(this.inscricao);
   }
 
   // GETs e SETs:
@@ -68,16 +71,8 @@ public class Titulo {
     return inscricao;
   }
 
-  public void setInscricao(String inscricao) {
-    this.inscricao = inscricao;
-  }
-
   public LocalDate getDataEmissao() {
     return dataEmissao;
-  }
-
-  public void setDataEmissao(LocalDate dataEmissao) {
-    this.dataEmissao = dataEmissao;
   }
 
   public String getZona() {
@@ -85,7 +80,7 @@ public class Titulo {
   }
 
   public void setZona(String zona) {
-    this.zona = zona;
+    this.zona = this.validarLocalizacao(TipoLocalizacaoValidacao.ZONA, zona);
   }
 
   public String getSecao() {
@@ -93,14 +88,10 @@ public class Titulo {
   }
 
   public void setSecao(String secao) {
-    this.secao = secao;
+    this.secao = this.validarLocalizacao(TipoLocalizacaoValidacao.SECAO, secao);
   }
 
   public Eleitor getEleitor() {
       return eleitor;
-  }
-
-  public void setEleitor(Eleitor eleitor) {
-      this.eleitor = eleitor;
   }
 }

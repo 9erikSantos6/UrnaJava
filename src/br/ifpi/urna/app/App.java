@@ -2,9 +2,11 @@ package br.ifpi.urna.app;
 
 import br.ifpi.urna.candidato.titular.Presidente;
 import br.ifpi.urna.candidato.vice.VicePresidente;
-import br.ifpi.urna.eleitor.Eleitor;
+
 import br.ifpi.urna.eleitor.Titulo;
 import br.ifpi.urna.partido.Partido;
+
+import br.ifpi.urna.eleitor.Eleitor;
 
 public class App {
     public static void main(String[] args) {
@@ -20,10 +22,11 @@ public class App {
 
       // Test Eleitor
       Eleitor eleitor = new Eleitor("JHON DOE", "2000-03-25", "RICK DOE", "NOTHING DOE");
-      System.out.println(eleitor.toString());
-
+    
       eleitor.criarTitulo("009", "8675");
 
-      System.out.println(eleitor.getTitulo().hashCode());
+
+
+      System.out.println(eleitor.toString());
     }
 }

@@ -1,23 +1,40 @@
-// Ainda não implementado
 package br.ifpi.urna.eleitor;
 
 import java.time.LocalDate;
 
 public class Eleitor {
-  private String nome;
-  private LocalDate dataNascimento;
-  private String nomePai;
-  private String nomeMae;
-  private Titulo titulo = null;
+  private final String id;
+  private final String nome;
+  private final LocalDate dataNascimento;
+  private final String nomePai;
+  private final String nomeMae;
+  private Titulo titulo;
 
   public Eleitor(String nome, String dataNascimento, String nomePai, String nomeMae) {
+    this.id = gerarID();
+    this.nome = nome;
+    this.dataNascimento = LocalDate.parse(dataNascimento);
+    this.nomePai = nomePai;
+    this.nomeMae = nomeMae;
+  }
+
+  public Eleitor(String id, String nome, String dataNascimento, String nomePai, String nomeMae) {
+    this.id = id;
+    this.nome = nome;
+    this.dataNascimento = this.parseDataNascimento(dataNascimento);
+    this.nomePai = nomePai;
+    this.nomeMae = nomeMae;
+  }
+
+  private String gerarID() {
+    return br.ifpi.urna.shared.utils.eleitor.Eleitor.gerarID();
+  }
+
+  private LocalDate parseDataNascimento(String dataNascimento) {
     try {
-      this.nome = nome;
-      this.dataNascimento = LocalDate.parse(dataNascimento);
-      this.nomePai = nomePai;
-      this.nomeMae = nomeMae;
-    } catch (Exception error) {
-      System.out.println(error.getMessage());
+      return LocalDate.parse(dataNascimento);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Data de nascimento inválida! Utilize o formato 'yyyy-MM-dd'.");
     }
   }
 
@@ -27,56 +44,50 @@ public class Eleitor {
     }
   }
 
-  public void renovarTitulo(String zona,  String secao) {
+  public void renovarTitulo(String zona, String secao) {
     if (this.titulo != null) {
       this.titulo.renovarZonaSecao(zona, secao);
     }
   }
 
+  @Override
   public String toString() {
     return String.format("""
-      \nNome: %s
+      ID: %s
+      Nome: %s
       Data de Nascimento: %s 
       Nome do Pai: %s 
-      Nome da mãe: %s
-      """, 
+      Nome da Mãe: %s
+      Título: %s
+      """,
+      this.id,
       this.nome, 
       this.dataNascimento, 
       this.nomePai, 
-      this.nomeMae);
+      this.nomeMae,
+      this.titulo != null ? this.titulo.getInscricao() : "N/A"
+    );
   }
 
   // GETs e SETs:
-  public String getNome() {
-    return nome;
+  public String getId() {
+    return id;
   }
 
-  public void setNome(String nome) {
-    this.nome = nome;
+  public String getNome() {
+    return nome;
   }
 
   public LocalDate getDataNascimento() {
     return dataNascimento;
   }
 
-  public void setDataNascimento(LocalDate dataNascimento) {
-    this.dataNascimento = dataNascimento;
-  }
-
   public String getNomePai() {
     return nomePai;
   }
 
-  public void setNomePai(String nomePai) {
-    this.nomePai = nomePai;
-  }
-
   public String getNomeMae() {
     return nomeMae;
-  }
-
-  public void setNomeMae(String nomeMae) {
-    this.nomeMae = nomeMae;
   }
 
   public Titulo getTitulo() {
