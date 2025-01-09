@@ -25,6 +25,21 @@ public class TituloDAO {
     }
   }
 
+  public static Titulo procurarPorInscricao(String inscricao) {
+    br.ifpi.urna.shared.utils.titulo.Titulo.validarIscricao(inscricao);
+
+    synchronized (TITULOS) {
+      Iterator<Titulo> tituloIterator = TITULOS.iterator();
+      while (tituloIterator.hasNext()) {
+        Titulo titulo = tituloIterator.next();
+        if (titulo.getInscricao().equals(inscricao)) {
+          return titulo;
+        }
+      }
+    }
+    throw new IllegalArgumentException("Titulo não encontrado!");
+  }
+
   public static void atualizarTitulo(String inscricao, String zona, String secao) {
     br.ifpi.urna.shared.utils.titulo.Titulo.validarIscricao(inscricao);
     br.ifpi.urna.shared.utils.titulo.Titulo.validarLocalizacao(TipoLocalizacaoValidacao.ZONA, zona);

@@ -7,6 +7,8 @@ import br.ifpi.urna.eleitor.Titulo;
 import br.ifpi.urna.partido.Partido;
 
 import br.ifpi.urna.eleitor.Eleitor;
+import br.ifpi.urna.db.eleitor.EleitorDAO;
+import br.ifpi.urna.db.eleitor.TituloDAO;
 
 public class App {
     public static void main(String[] args) {
@@ -25,8 +27,18 @@ public class App {
     
       eleitor.criarTitulo("009", "8675");
 
+      TituloDAO.criarTitulo(eleitor.getTitulo());
+      EleitorDAO.criarEleitor(eleitor);
+
+      System.out.println(TituloDAO.listarTitulos());
+      System.out.println(TituloDAO.procurarPorInscricao(eleitor.getTitulo().getInscricao()));
 
 
-      System.out.println(eleitor.toString());
+      System.out.println(EleitorDAO.listarEleitores());
+      System.out.println(EleitorDAO.procurarPorID(eleitor.getId()));
+
+
+
+      // System.out.println(eleitor.toString());
     }
 }

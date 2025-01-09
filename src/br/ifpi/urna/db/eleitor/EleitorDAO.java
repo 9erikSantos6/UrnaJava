@@ -24,6 +24,19 @@ public class EleitorDAO {
     }
   }
 
+  public static Eleitor procurarPorID(String id) {
+    synchronized (ELEITORS) {
+      Iterator<Eleitor> eleitorIterator = ELEITORS.iterator();
+      while (eleitorIterator.hasNext()) {
+        Eleitor titulo = eleitorIterator.next();
+        if (titulo.getId().equals(id)) {
+          return titulo;
+        }
+      }
+    }
+    throw new IllegalArgumentException("Eleitor não encontrado!");
+  }
+
   public static void deletarTitulo(String id) {
     synchronized (ELEITORS) {
       Iterator<Eleitor> eleitorIterator = ELEITORS.iterator();
@@ -36,6 +49,6 @@ public class EleitorDAO {
       }
     }
 
-    throw new IllegalArgumentException("eleitor não encontrado para exclusão.");
+    throw new IllegalArgumentException("Eleitor não encontrado para exclusão.");
   }
 }

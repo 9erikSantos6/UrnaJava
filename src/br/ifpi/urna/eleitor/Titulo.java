@@ -48,7 +48,7 @@ public class Titulo {
       this.zona,
       this.secao,
       this.dataEmissao.toString(),
-      this.eleitor != null ? this.eleitor.getNome() : "N/A"
+      this.eleitor != null ? this.eleitor.getId() : "N/A"
     );
   }
 
