@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.Iterator;
 
-import br.ifpi.urna.eleitor.Eleitor;
 import br.ifpi.urna.eleitor.Titulo;
 import br.ifpi.urna.shared.utils.titulo.TipoLocalizacaoValidacao;
 
