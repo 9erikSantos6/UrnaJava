@@ -22,22 +22,21 @@ public class App {
       // vicePresidente.desassociarViceCandidato();
       // System.out.println(vicePresidente.getCandidatoTitularAssociado());
 
-      // Test Eleitor
+      /* Testando EleitorDAO e TituloDAO*/
+
+      // Criando eleitor
       Eleitor eleitor = new Eleitor("JHON DOE", "2000-03-25", "RICK DOE", "NOTHING DOE");
-    
       eleitor.criarTitulo("009", "8675");
 
-      TituloDAO.criarTitulo(eleitor.getTitulo());
-      EleitorDAO.criarEleitor(eleitor);
+      // Salvando eleitor e título:
+      TituloDAO.armazenarTitulo(eleitor.getTitulo());
+      EleitorDAO.armazenarEleitor(eleitor);
 
-      System.out.println(TituloDAO.listarTitulos());
+      // System.out.println(TituloDAO.listarTitulos());
       System.out.println(TituloDAO.procurarPorInscricao(eleitor.getTitulo().getInscricao()));
 
-
-      System.out.println(EleitorDAO.listarEleitores());
+      // System.out.println(EleitorDAO.listarEleitores());
       System.out.println(EleitorDAO.procurarPorID(eleitor.getId()));
-
-
 
       // System.out.println(eleitor.toString());
     }

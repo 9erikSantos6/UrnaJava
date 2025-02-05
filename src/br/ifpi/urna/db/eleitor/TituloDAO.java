@@ -7,15 +7,26 @@ import java.util.List;
 import java.util.Set;
 import java.util.Iterator;
 
+import br.ifpi.urna.eleitor.Eleitor;
 import br.ifpi.urna.eleitor.Titulo;
 import br.ifpi.urna.shared.utils.titulo.TipoLocalizacaoValidacao;
 
 public class TituloDAO {
   private static final Set<Titulo> TITULOS = Collections.synchronizedSet(new HashSet<>());
 
-  public static void criarTitulo(Titulo titulo) {
+  public static void armazenarTitulo(Titulo titulo) {
     if (!(TITULOS.add(titulo))) {
       throw new IllegalArgumentException("Erro ao adicionar título! O título já existe!");
+    }
+  }
+
+  public static void armazenarListaTitulos(List<Titulo> titulos) {
+    synchronized (TITULOS) {
+      for (Titulo titulo : titulos) {
+        if (!(TITULOS.add(titulo))) {
+          throw new IllegalArgumentException("Erro ao adicionar eleitor! O eleitor já existe!");
+        }
+      }
     }
   }
 

@@ -34,7 +34,7 @@ public class Eleitor {
     try {
       return LocalDate.parse(dataNascimento);
     } catch (Exception e) {
-      throw new IllegalArgumentException("Data de nascimento inválida! Utilize o formato 'yyyy-MM-dd'.");
+      throw new IllegalArgumentException("Data de nascimento inválida! Utilize o formato 'YYYY-MM-DD'.");
     }
   }
 

@@ -10,23 +10,33 @@ import java.util.Iterator;
 import br.ifpi.urna.eleitor.Eleitor;
 
 public class EleitorDAO {
-  private static final Set<Eleitor> ELEITORS = Collections.synchronizedSet(new HashSet<>());
+  private static final Set<Eleitor> ELEITORES = Collections.synchronizedSet(new HashSet<>());
 
-  public static void criarEleitor(Eleitor eleitor) {
-    if (!(ELEITORS.add(eleitor))) {
+  public static void armazenarEleitor(Eleitor eleitor) {
+    if (!(ELEITORES.add(eleitor))) {
       throw new IllegalArgumentException("Erro ao adicionar eleitor! O eleitor já existe!");
     }
   }
 
+  public static void armazenarListaEleitores(List<Eleitor> eleitores) {
+    synchronized (ELEITORES) {
+      for (Eleitor eleitor : eleitores) {
+        if (!(ELEITORES.add(eleitor))) {
+          throw new IllegalArgumentException("Erro ao adicionar eleitor! O eleitor já existe!");
+        }
+      }
+    }
+  }
+
   public static List<Eleitor> listarEleitores() {
-    synchronized (ELEITORS) {
-      return new ArrayList<>(ELEITORS);
+    synchronized (ELEITORES) {
+      return new ArrayList<>(ELEITORES);
     }
   }
 
   public static Eleitor procurarPorID(String id) {
-    synchronized (ELEITORS) {
-      Iterator<Eleitor> eleitorIterator = ELEITORS.iterator();
+    synchronized (ELEITORES) {
+      Iterator<Eleitor> eleitorIterator = ELEITORES.iterator();
       while (eleitorIterator.hasNext()) {
         Eleitor titulo = eleitorIterator.next();
         if (titulo.getId().equals(id)) {
@@ -38,8 +48,8 @@ public class EleitorDAO {
   }
 
   public static void deletarTitulo(String id) {
-    synchronized (ELEITORS) {
-      Iterator<Eleitor> eleitorIterator = ELEITORS.iterator();
+    synchronized (ELEITORES) {
+      Iterator<Eleitor> eleitorIterator = ELEITORES.iterator();
       while (eleitorIterator.hasNext()) {
         Eleitor titulo = eleitorIterator.next();
         if (titulo.getId().equals(id)) {
