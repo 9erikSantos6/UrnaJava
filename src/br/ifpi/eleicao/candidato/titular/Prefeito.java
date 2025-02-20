@@ -6,7 +6,7 @@ import br.ifpi.eleicao.shared.interfaces.candidato.IViceAssociado;
 import br.ifpi.eleicao.shared.models.candidato.CandidatoTitular;
 import br.ifpi.eleicao.shared.models.candidato.ViceCandidato;
 import br.ifpi.eleicao.shared.utils.candidato.Candidato;
-import br.ifpi.eleicao.shared.utils.candidato.TipoCandidatoValidacao;
+import br.ifpi.eleicao.shared.utils.candidato.TipoCandidato;
 
 public class Prefeito extends CandidatoTitular implements IViceAssociado {
   private VicePrefeito vicePrefeitoAssociado;
@@ -18,7 +18,7 @@ public class Prefeito extends CandidatoTitular implements IViceAssociado {
 
   @Override
   protected String validarNumero(String numero) {
-    return Candidato.validarNumero(TipoCandidatoValidacao.PREFEITO, numero);
+    return Candidato.validarNumero(TipoCandidato.PREFEITO, numero);
   }
 
   public void associarViceCandidato(ViceCandidato vicePrefeito) {
@@ -36,6 +36,15 @@ public class Prefeito extends CandidatoTitular implements IViceAssociado {
       this.vicePrefeitoAssociado.desassociarViceCandidato();
     }
     this.vicePrefeitoAssociado = null;
+  }
+
+  @Override
+  public String toString() {
+    return super.toString().concat(String.format("""
+      Vice-Prefeito: %s
+      """,
+      this.vicePrefeitoAssociado.getNome()
+      ));
   }
 
   // Gets

@@ -11,6 +11,17 @@ public abstract class Candidato {
     this.partido = partido;
   }
 
+  @Override
+  public String toString() {
+    return String.format("""
+      Nome: %s
+      Partido: %s
+      """,
+      this.nome, 
+      this.partido.getNome()
+    );
+  }
+
   // Gets e Sets:
   public String getNome() {
     return nome;

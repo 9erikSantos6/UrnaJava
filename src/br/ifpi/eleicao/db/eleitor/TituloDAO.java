@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import br.ifpi.eleicao.eleitor.Titulo;
-import br.ifpi.eleicao.shared.utils.titulo.TipoLocalizacaoValidacao;
+import br.ifpi.eleicao.shared.utils.eleicao.TipoLocalizacao;
 
 import java.util.Iterator;
 
@@ -37,7 +37,7 @@ public class TituloDAO {
   }
 
   public static Titulo procurarPorInscricao(String inscricao) {
-    br.ifpi.eleicao.shared.utils.titulo.Titulo.validarIscricao(inscricao);
+    br.ifpi.eleicao.shared.utils.eleicao.CadastroEleicao.validarNumeroIscricaoTitulo(inscricao);
 
     synchronized (TITULOS) {
       Iterator<Titulo> tituloIterator = TITULOS.iterator();
@@ -52,9 +52,9 @@ public class TituloDAO {
   }
 
   public static void atualizarTitulo(String inscricao, String zona, String secao) {
-    br.ifpi.eleicao.shared.utils.titulo.Titulo.validarIscricao(inscricao);
-    br.ifpi.eleicao.shared.utils.titulo.Titulo.validarLocalizacao(TipoLocalizacaoValidacao.ZONA, zona);
-    br.ifpi.eleicao.shared.utils.titulo.Titulo.validarLocalizacao(TipoLocalizacaoValidacao.SECAO, secao);
+    br.ifpi.eleicao.shared.utils.eleicao.CadastroEleicao.validarNumeroIscricaoTitulo(inscricao);
+    br.ifpi.eleicao.shared.utils.eleicao.CadastroEleicao.validarLocalizacao(TipoLocalizacao.ZONA, zona);
+    br.ifpi.eleicao.shared.utils.eleicao.CadastroEleicao.validarLocalizacao(TipoLocalizacao.SECAO, secao);
 
     synchronized (TITULOS) {
       for (Titulo titulo : TITULOS) {
@@ -69,7 +69,7 @@ public class TituloDAO {
   }
 
   public static void deletarTitulo(String inscricao) {
-    br.ifpi.eleicao.shared.utils.titulo.Titulo.validarIscricao(inscricao);
+    br.ifpi.eleicao.shared.utils.eleicao.CadastroEleicao.validarNumeroIscricaoTitulo(inscricao);
     synchronized (TITULOS) {
       Iterator<Titulo> tituloIterator = TITULOS.iterator();
       while (tituloIterator.hasNext()) {

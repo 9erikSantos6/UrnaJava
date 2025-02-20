@@ -3,7 +3,7 @@ package br.ifpi.eleicao.candidato.titular;
 import br.ifpi.eleicao.partido.Partido;
 import br.ifpi.eleicao.shared.models.candidato.CandidatoTitular;
 import br.ifpi.eleicao.shared.utils.candidato.Candidato;
-import br.ifpi.eleicao.shared.utils.candidato.TipoCandidatoValidacao;
+import br.ifpi.eleicao.shared.utils.candidato.TipoCandidato;
 
 public class DeputadoEstadual extends CandidatoTitular {
   public DeputadoEstadual(String nome, String numero, Partido partido) {
@@ -12,6 +12,6 @@ public class DeputadoEstadual extends CandidatoTitular {
 
   @Override
   protected String validarNumero(String numero) {
-    return Candidato.validarNumero(TipoCandidatoValidacao.DEPUTADO_ESTADUAL, numero);
+    return Candidato.validarNumero(TipoCandidato.DEPUTADO_ESTADUAL, numero);
   }
 }

@@ -22,6 +22,18 @@ public abstract class CandidatoTitular extends Candidato {
     this.votos = 0;
   }
 
+  @Override
+  public String toString() {
+      return super.toString().concat(String.format(
+      """
+      Número: d%
+      Quantidade de votos: d%
+      """,
+      this.numero,
+      this.votos
+      ));
+  }
+
   // GETs e SETs
 
   public int getVotos() {

@@ -5,7 +5,7 @@ package br.ifpi.eleicao.eleitor;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import br.ifpi.eleicao.shared.utils.titulo.TipoLocalizacaoValidacao;
+import br.ifpi.eleicao.shared.utils.eleicao.TipoLocalizacao;
 
 public class Titulo {
   private final String inscricao;
@@ -16,23 +16,23 @@ public class Titulo {
 
   Titulo(String zona, String secao, Eleitor eleitor) {
     this.inscricao = this.gerarNumeroInscricao();
-    this.zona = this.validarLocalizacao(TipoLocalizacaoValidacao.ZONA, zona);
-    this.secao = this.validarLocalizacao(TipoLocalizacaoValidacao.SECAO, secao);
+    this.zona = this.validarLocalizacao(TipoLocalizacao.ZONA, zona);
+    this.secao = this.validarLocalizacao(TipoLocalizacao.SECAO, secao);
     this.dataEmissao = LocalDate.now();
     this.eleitor = eleitor;
   }
 
-  private String validarLocalizacao(TipoLocalizacaoValidacao tipoLocalizacao, String numero) {
-    return br.ifpi.eleicao.shared.utils.titulo.Titulo.validarLocalizacao(tipoLocalizacao, numero);
+  private String validarLocalizacao(TipoLocalizacao tipoLocalizacao, String numero) {
+    return br.ifpi.eleicao.shared.utils.eleicao.CadastroEleicao.validarLocalizacao(tipoLocalizacao, numero);
   }
 
   private String gerarNumeroInscricao() {
-    return br.ifpi.eleicao.shared.utils.titulo.Titulo.gerarNumeroInscricao();
+    return br.ifpi.eleicao.shared.utils.eleicao.CadastroEleicao.gerarNumeroInscricaoTitulo();
   }
 
   public void renovarZonaSecao(String zona, String secao) {
-    this.zona = this.validarLocalizacao(TipoLocalizacaoValidacao.ZONA, zona);
-    this.secao = this.validarLocalizacao(TipoLocalizacaoValidacao.SECAO, secao);
+    this.zona = this.validarLocalizacao(TipoLocalizacao.ZONA, zona);
+    this.secao = this.validarLocalizacao(TipoLocalizacao.SECAO, secao);
   }
 
   @Override
@@ -80,7 +80,7 @@ public class Titulo {
   }
 
   public void setZona(String zona) {
-    this.zona = this.validarLocalizacao(TipoLocalizacaoValidacao.ZONA, zona);
+    this.zona = this.validarLocalizacao(TipoLocalizacao.ZONA, zona);
   }
 
   public String getSecao() {
@@ -88,7 +88,7 @@ public class Titulo {
   }
 
   public void setSecao(String secao) {
-    this.secao = this.validarLocalizacao(TipoLocalizacaoValidacao.SECAO, secao);
+    this.secao = this.validarLocalizacao(TipoLocalizacao.SECAO, secao);
   }
 
   public Eleitor getEleitor() {
